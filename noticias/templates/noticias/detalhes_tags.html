@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Detalhes da Tag</h2>
+<a href="{% url 'noticias:listaTags' %}">&larr; Voltar à lista</a>
+<p><strong>Título:</strong> {{ tag.titulo }}</p>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Detalhes da Notícia</h2>
+<a href="{% url 'noticias:listaNoticias' %}">&larr; Voltar à lista</a>
+<p><strong>Título:</strong> {{ noticia.titulo }}</p>
+<p><strong>Texto:</strong> {{ noticia.texto }}</p>
+<p><strong>Categoria:</strong> {{ noticia.categoria.nome }}</p>
+<p><strong>Tags:</strong>
+    {% for tag in noticia.tags.all %}{{ tag.titulo }}{% if not forloop.last %}, {% endif %}{% endfor %}
+</p>
+{% endblock content %}

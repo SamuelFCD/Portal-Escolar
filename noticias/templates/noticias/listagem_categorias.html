@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Lista de Categorias</h2>
+<table class="tabela-listagem">
+    <thead>
+        <tr>
+
+            <th>Nome</th>
+            <th>Detalhes</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for categoria in categorias %}
+        <tr>
+            <td><a href="{% url 'noticias:detalhesCategorias' categoria.id %}">{{ categoria.nome }}</a></td>
+
+            <td><a href="{% url 'noticias:detalhesCategorias' categoria.id %}">Detalhes</a></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

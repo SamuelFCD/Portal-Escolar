@@ -5,17 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Portal Escolar</title>
+    <link rel="stylesheet" href="{% static 'noticias/style.css' %}">
 </head>
 
 <body>
 
-    {'% include "fragments/_header.html" %'}
+    {% include "fragments/_header.html" %}
 
     <main>
         {% block content %}{% endblock content %}
     </main>
 
-    {'% include "fragments/_footer.html" %'}
+    {% include "fragments/_footer.html" %}
 
 </body>
 
