@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Lista de Tags</h2>
+<a href="{% url 'noticias:cadastrarTag' %}">+ Nova tag</a>
+
 <table class="tabela-listagem">
     <thead>
         <tr>
             <th>Título</th>
             <th>Detalhes</th>
+            <th>Editar</th>
+            <th>Excluir</th>
         </tr>
     </thead>
     <tbody>
@@ -13,8 +17,40 @@
         <tr>
             <td><a href="{% url 'noticias:detalhesTags' tag.id %}">{{ tag.titulo }}</a></td>
             <td><a href="{% url 'noticias:detalhesTags' tag.id %}">Detalhes</a></td>
+            <td><a href="{% url 'noticias:atualizarTag' tag.id %}">Editar</a></td>
+            <td>
+    <button type="button" class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-tag-{{ tag.id }}">
+        Excluir
+    </button>
+</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{% for tag in tags %}
+<div class="modal fade" id="modal-tag-{{ tag.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir tag</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <form method="post" action="{% url 'noticias:excluirTag' tag.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Deseja realmente excluir <strong>{{ tag.titulo }}</strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock content %}

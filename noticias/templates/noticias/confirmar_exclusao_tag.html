@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Excluir tag</h2>
+
+<p>Deseja realmente excluir a tag <strong>{{ tag.titulo }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar exclusão</button>
+    <a href="{% url 'noticias:listaTags' %}">Cancelar</a>
+</form>
+{% endblock content %}

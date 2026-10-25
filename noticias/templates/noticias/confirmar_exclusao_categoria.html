@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Excluir categoria</h2>
+
+<p class="aviso">⚠️ Atenção: esta categoria pode estar vinculada a notícias. Se estiver, a exclusão será bloqueada.</p>
+
+<p>Deseja realmente excluir a categoria <strong>{{ categoria.nome }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar exclusão</button>
+    <a href="{% url 'noticias:listaCategorias' %}">Cancelar</a>
+</form>
+{% endblock content %}

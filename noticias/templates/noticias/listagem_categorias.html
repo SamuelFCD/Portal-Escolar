@@ -2,24 +2,60 @@
 {% block content %}
 
 <h2>Lista de Categorias</h2>
+<a href="{% url 'noticias:cadastrarCategoria' %}">+ Nova categoria</a>
+
 <table class="tabela-listagem">
     <thead>
         <tr>
-
             <th>Nome</th>
             <th>Detalhes</th>
-            
+            <th>Editar</th>
+            <th>Excluir</th>
         </tr>
     </thead>
     <tbody>
         {% for categoria in categorias %}
         <tr>
             <td><a href="{% url 'noticias:detalhesCategorias' categoria.id %}">{{ categoria.nome }}</a></td>
-
             <td><a href="{% url 'noticias:detalhesCategorias' categoria.id %}">Detalhes</a></td>
-
+            <td><a href="{% url 'noticias:atualizarCategoria' categoria.id %}">Editar</a></td>
+            <td>
+    <button type="button" class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-categoria-{{ categoria.id }}">
+        Excluir
+    </button>
+</td>
         </tr>
         {% endfor %}
     </tbody>
+
 </table>
+
+{% for categoria in categorias %}
+<div class="modal fade" id="modal-categoria-{{ categoria.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <form method="post" action="{% url 'noticias:excluirCategoria' categoria.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        ⚠️ Esta categoria pode estar vinculada a notícias. Se estiver, a exclusão será bloqueada.
+                    </div>
+                    <p>Deseja realmente excluir <strong>{{ categoria.nome }}</strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock content %}
