@@ -58,6 +58,21 @@ main {
     width: 100%;
 }
 
+main a {
+    display: inline-block;
+    margin-bottom: 1.2rem;   /* <- empurra o Cancelar pra cima */
+    font-weight: 600;
+}
+
+main a.btn {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+main a.btn:hover {
+    text-decoration: none;
+}
+
 h2 {
     margin-bottom: 1.2rem;
     color: #1a252f;

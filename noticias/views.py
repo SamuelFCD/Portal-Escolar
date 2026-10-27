@@ -19,35 +19,6 @@ def detalhes_categoria(request, id):
 
     return render(request, 'noticias/detalhes_categoria.html', context)
 
-def listagem_tags(request): 
-
-    context = {'tags': Tag.objects.all()}
-
-    return render(request, 'noticias/listagem_tags.html', context)
-
-def detalhes_tag(request, id):
-
-    tag = Tag.objects.get(id=id)
-
-    context = {'tag': tag}
-
-    return render(request, 'noticias/detalhes_tags.html', context)
-
-def listagem_noticias(request):
-
-    context = {'noticias': Noticia.objects.all()}
-
-    return render(request, 'noticias/listagem_noticias.html', context)
-
-def detalhes_noticia(request, id):
-
-    noticia = Noticia.objects.get(id=id)
-
-    context = {'noticia': noticia}
-    
-    return render(request, 'noticias/detalhes_noticias.html', context)
-
-
 def cadastrar_categoria(request):
     form = CategoriaForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -82,6 +53,21 @@ def excluir_categoria(request, id):
 
     return render(request, 'noticias/confirmar_exclusao_categoria.html', {'categoria': categoria})
 
+
+def listagem_tags(request): 
+
+    context = {'tags': Tag.objects.all()}
+
+    return render(request, 'noticias/listagem_tags.html', context)
+
+def detalhes_tag(request, id):
+
+    tag = Tag.objects.get(id=id)
+
+    context = {'tag': tag}
+
+    return render(request, 'noticias/detalhes_tags.html', context)
+
 def cadastrar_tag(request):
     form = TagForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -109,3 +95,19 @@ def excluir_tag(request, id):
         return redirect('noticias:listaTags')
 
     return render(request, 'noticias/confirmar_exclusao_tag.html', {'tag': tag})
+
+def listagem_noticias(request):
+
+    context = {'noticias': Noticia.objects.all()}
+
+    return render(request, 'noticias/listagem_noticias.html', context)
+
+def detalhes_noticia(request, id):
+
+    noticia = Noticia.objects.get(id=id)
+
+    context = {'noticia': noticia}
+    
+    return render(request, 'noticias/detalhes_noticias.html', context)
+
+
